@@ -136,7 +136,7 @@
 	_encryptor(Plain_recommendationLetters, Cipher_recommendationLetters);
 	_encryptor(Plain_researchExperience, Cipher_researchExperience);
 
-	//  Trial code  
+	//  Trial code
 	// const dataToEncrypt = [1, 2, 3, 4, 5];
 	// const plaintext = seal.PlainText();
 	// const ciphertext = seal.CipherText();
@@ -144,47 +144,43 @@
 	// _encryptor(plaintext, ciphertext);
 	// console.log("Encrypted ciphertext:", ciphertext);
 	// console.log(typeof ciphertext);
-
-	
+	module.exports = {
+		context,
+		_decryptor,
+		Cipher_academicScores,
+		Cipher_attendancePercentage,
+		Cipher_extracurricularActivities,
+		Cipher_basicFitnessScores,
+		Cipher_teamworkSkillScores,
+		Cipher_recommendationLetters,
+		Cipher_researchExperience,
+	};
 })();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// Note:
-	// cipher text that we are generating is in the form of an object
-	// {
-	//   instance: [Getter],
-	//   unsafeInject: [Function: unsafeInject],
-	//   delete: [Function: delete],
-	//   reserve: [Function: reserve],
-	//   resize: [Function: resize],
-	//   release: [Function: release],
-	//   coeffModulusSize: [Getter],
-	//   polyModulusDegree: [Getter],
-	//   size: [Getter],
-	//   sizeCapacity: [Getter],
-	//   isTransparent: [Getter],
-	//   isNttForm: [Getter],
-	//   parmsId: [Getter],
-	//   scale: [Getter],
-	//   setScale: [Function: setScale],
-	//   pool: [Getter],
-	//   save: [Function: save],
-	//   saveArray: [Function: saveArray],
-	//   load: [Function: load],
-	//   loadArray: [Function: loadArray],
-	//   copy: [Function: copy],
-	//   clone: [Function: clone],
-	//   move: [Function: move]
-	// }
+// Note:
+// cipher text that we are generating is in the form of an object
+// {
+//   instance: [Getter],
+//   unsafeInject: [Function: unsafeInject],
+//   delete: [Function: delete],
+//   reserve: [Function: reserve],
+//   resize: [Function: resize],
+//   release: [Function: release],
+//   coeffModulusSize: [Getter],
+//   polyModulusDegree: [Getter],
+//   size: [Getter],
+//   sizeCapacity: [Getter],
+//   isTransparent: [Getter],
+//   isNttForm: [Getter],
+//   parmsId: [Getter],
+//   scale: [Getter],
+//   setScale: [Function: setScale],
+//   pool: [Getter],
+//   save: [Function: save],
+//   saveArray: [Function: saveArray],
+//   load: [Function: load],
+//   loadArray: [Function: loadArray],
+//   copy: [Function: copy],
+//   clone: [Function: clone],
+//   move: [Function: move]
+// }
