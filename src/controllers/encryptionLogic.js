@@ -1,3 +1,10 @@
+const {
+	_encoder,
+	_decoder,
+	_encryptor,
+	_decryptor,
+} = require("customFunctions.js");
+
 const SEAL = require("node-seal");
 
 // Wait for the web assembly to fully initialize
@@ -41,7 +48,7 @@ if (!context.parametersSet()) {
 // Keys
 ////////////////////////
 
-// Create a new KeyGenerator
+// Create a new KeyGenerator (use uploaded keys if applicable)
 const keyGenerator = seal.KeyGenerator(context);
 
 // Get the SecretKey from the keyGenerator
@@ -50,9 +57,13 @@ const Secret_key_Keypair_A_ = keyGenerator.secretKey();
 // Get the PublicKey from the keyGenerator
 const Public_key_Keypair_A_ = keyGenerator.createPublicKey();
 
-////////////////////////
-// Variables
-////////////////////////
+// Create a new GaloisKey
+const Galois_key_Keypair_A_ = keyGenerator.createGaloisKeys();
+
+// Create a new RelinKey
+// const Relin_key_Keypair_A_ = keyGenerator.createRelinKeys();
+
+
 
 ////////////////////////
 // Instances
@@ -63,9 +74,3 @@ const evaluator = seal.Evaluator(context);
 
 // Create a CkksEncoder (only ckks SchemeType)
 const ckksEncoder = seal.CKKSEncoder(context);
-
-// Create an Encryptor
-const encryptor = seal.Encryptor(context, Public_key_Keypair_A_);
-
-// Create a Decryptor
-const decryptor = seal.Decryptor(context, Secret_key_Keypair_A_);
