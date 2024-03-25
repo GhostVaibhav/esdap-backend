@@ -1,16 +1,23 @@
-// index.js
-
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
-const PORT = 3000;
 const rootRouter = require("./routes/index.js");
 
-// Middleware
-app.use(bodyParser.json());
+const cors = require("cors");
+
+require("dotenv").config();
+const PORT = process.env.PORT || 4001;
+
+app.use(cors());
+app.use(express.json());
 
 // Routes
-app.use("/api/v1", rootRouter);
+app.use("/esdap/v1", rootRouter);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).send("Something went wrong on ESDAP-Backend	");
+});
 
 // Start the server
 app.listen(PORT, () => {

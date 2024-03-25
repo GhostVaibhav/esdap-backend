@@ -1,4 +1,27 @@
-(async () => {
+const encryptData = async ({
+	academicScores,
+	attendancePercentage,
+	extracurricularActivities,
+	basicFitnessScores,
+	teamworkSkillScores,
+	recommendationLetters,
+	researchExperience,
+}) => {
+	// testing by mock data
+
+	// importing mock data for testing
+	// const {
+	// 	academicScores,
+	// 	attendancePercentage,
+	// 	extracurricularActivities,
+	// 	basicFitnessScores,
+	// 	teamworkSkillScores,
+	// 	recommendationLetters,
+	// 	researchExperience,
+	// } = require("../../mock/mockData");
+
+	// testing end
+
 	const SEAL = require("node-seal");
 	const seal = await SEAL();
 
@@ -6,15 +29,13 @@
 	// Encryption Parameters
 	////////////////////////
 
-	// Create a new EncryptionParameters
 	const schemeType = seal.SchemeType.ckks;
 	const securityLevel = seal.SecurityLevel.tc128;
-	const polyModulusDegree = 4096;
-	const bitSizes = [46, 16, 46];
+	const polyModulusDegree = 8192;
+	const bitSizes = [60, 20, 20, 20, 20, 60];
 
 	const encParms = seal.EncryptionParameters(schemeType);
 
-	// Assign Poly Modulus Degree
 	encParms.setPolyModulusDegree(polyModulusDegree);
 
 	// Create a suitable set of CoeffModulus primes
@@ -40,56 +61,25 @@
 	// Keys
 	////////////////////////
 
-	// Create a new KeyGenerator (use uploaded keys if applicable)
 	const keyGenerator = seal.KeyGenerator(context);
-
-	// Get the SecretKey from the keyGenerator
 	const Secret_key_Keypair_A_ = keyGenerator.secretKey();
-
-	// Get the PublicKey from the keyGenerator
 	const Public_key_Keypair_A_ = keyGenerator.createPublicKey();
-
-	// Create a new GaloisKey
 	const Galois_key_Keypair_A_ = keyGenerator.createGaloisKeys();
-
-	// Create a new RelinKey
-	// const Relin_key_Keypair_A_ = keyGenerator.createRelinKeys();
 
 	////////////////////////
 	// Instances
 	////////////////////////
 
-	// Create an Evaluator
-	const evaluator = seal.Evaluator(context);
+	// const evaluator = seal.Evaluator(context);
 
-	// Create a CkksEncoder (only ckks SchemeType)
 	const ckksEncoder = seal.CKKSEncoder(context);
 
-	// Create an Encryptor
 	const encryptor = seal.Encryptor(context, Public_key_Keypair_A_);
 
-	// Create a Decryptor
-	const decryptor = seal.Decryptor(context, Secret_key_Keypair_A_);
-
-	// Custom Functions
-	// Encode data to a PlainText
+	// Custom Function
+	// Encoder
 	const _encoder = (array, Plain_A) => {
-		ckksEncoder.encode(Float64Array.from(array), Math.pow(2, 16), Plain_A);
-	};
-
-	// Encode data to a CipherText
-	const _decoder = (Plain_A) => {
-		return ckksEncoder.decode(Plain_A);
-	};
-
-	// Encrypt a PlainText
-	const _encryptor = (Plain_A, Cipher_A) => {
-		encryptor.encrypt(Plain_A, Cipher_A);
-	};
-
-	// Decrypt a CipherText
-	const _decryptor = (Cipher_A, Plain_A) => {
-		decryptor.decrypt(Cipher_A, Plain_A);
+		ckksEncoder.encode(Float64Array.from(array), Math.pow(2, 32), Plain_A);
 	};
 
 	// ////////////////////////
@@ -100,7 +90,7 @@
 	const Plain_academicScores = seal.PlainText();
 	const Plain_attendancePercentage = seal.PlainText();
 	const Plain_extracurricularActivities = seal.PlainText();
-	const Plain_basicFitnessScores = seal.PlainText();
+	const arrayasicFitnessScores = seal.PlainText();
 	const Plain_teamworkSkillScores = seal.PlainText();
 	const Plain_recommendationLetters = seal.PlainText();
 	const Plain_researchExperience = seal.PlainText();
@@ -116,37 +106,33 @@
 	const Cipher_researchExperience = seal.CipherText();
 
 	// Encoding (all inputs are array)
-	_encoder(input1, Plain_academicScores);
-	_encoder(input2, Plain_attendancePercentage);
-	_encoder(input3, Plain_extracurricularActivities);
-	_encoder(input4, Plain_basicFitnessScores);
-	_encoder(input5, Plain_teamworkSkillScores);
-	_encoder(input6, Plain_recommendationLetters);
-	_encoder(input7, Plain_researchExperience);
+	_encoder(academicScores, Plain_academicScores);
+	_encoder(attendancePercentage, Plain_attendancePercentage);
+	_encoder(extracurricularActivities, Plain_extracurricularActivities);
+	_encoder(basicFitnessScores, arrayasicFitnessScores);
+	_encoder(teamworkSkillScores, Plain_teamworkSkillScores);
+	_encoder(recommendationLetters, Plain_recommendationLetters);
+	_encoder(researchExperience, Plain_researchExperience);
 
 	// Encrypting
-	_encryptor(Plain_academicScores, Cipher_academicScores);
-	_encryptor(Plain_attendancePercentage, Cipher_attendancePercentage);
-	_encryptor(
+	encryptor.encrypt(Plain_academicScores, Cipher_academicScores);
+	encryptor.encrypt(Plain_attendancePercentage, Cipher_attendancePercentage);
+	encryptor.encrypt(
 		Plain_extracurricularActivities,
 		Cipher_extracurricularActivities
 	);
-	_encryptor(Plain_basicFitnessScores, Cipher_basicFitnessScores);
-	_encryptor(Plain_teamworkSkillScores, Cipher_teamworkSkillScores);
-	_encryptor(Plain_recommendationLetters, Cipher_recommendationLetters);
-	_encryptor(Plain_researchExperience, Cipher_researchExperience);
+	encryptor.encrypt(arrayasicFitnessScores, Cipher_basicFitnessScores);
+	encryptor.encrypt(Plain_teamworkSkillScores, Cipher_teamworkSkillScores);
+	encryptor.encrypt(
+		Plain_recommendationLetters,
+		Cipher_recommendationLetters
+	);
+	encryptor.encrypt(Plain_researchExperience, researchExperience);
 
-	//  Trial code
-	// const dataToEncrypt = [1, 2, 3, 4, 5];
-	// const plaintext = seal.PlainText();
-	// const ciphertext = seal.CipherText();
-	// _encoder(dataToEncrypt, plaintext);
-	// _encryptor(plaintext, ciphertext);
-	// console.log("Encrypted ciphertext:", ciphertext);
-	// console.log(typeof ciphertext);
-	module.exports = {
+	return {
 		context,
-		_decryptor,
+		Secret_key_Keypair_A_,
+		Galois_key_Keypair_A_,
 		Cipher_academicScores,
 		Cipher_attendancePercentage,
 		Cipher_extracurricularActivities,
@@ -155,7 +141,11 @@
 		Cipher_recommendationLetters,
 		Cipher_researchExperience,
 	};
-})();
+};
+
+module.exports = {
+	encryptData,
+};
 
 // Note:
 // cipher text that we are generating is in the form of an object
@@ -183,4 +173,3 @@
 //   copy: [Function: copy],
 //   clone: [Function: clone],
 //   move: [Function: move]
-// }

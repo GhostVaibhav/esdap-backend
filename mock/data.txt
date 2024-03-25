@@ -1,9 +1,0 @@
-{
-  "academicScores": [100, 100, 100, 100, 100],
-  "attendancePercentage": 100,
-  "extracurricularActivities": {"Sports": 10, "Debate Club": 10, "Music": 10},
-  "basicFitnessScores": [100, 100, 100, 100, 100],
-  "teamworkSkills": [10, 10, 10, 10, 10],
-  "recommendationLetters": 10,
-  "researchExperience": 10
-}
