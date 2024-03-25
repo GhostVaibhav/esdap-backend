@@ -27,9 +27,9 @@ router.post("/data", validateStudentData, (req, res) => {
 });
 
 // esdap/v1/backend/version
-router.get("/version", (req, res) => {
+router.post("/test", (req, res) => {
 	res.send({
-		version: "1.0.0",
+		message: "Backend Connection is healthy",
 	});
 });
 

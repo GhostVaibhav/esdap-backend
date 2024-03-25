@@ -5,7 +5,7 @@ const studentZodSchema = object({
 	attendancePercentage: array(number()),
 	extracurricularActivities: array(number()),
 	basicFitnessScores: array(number()),
-	teamworkSkills: array(number()),
+	teamworkSkillScores: array(number()),
 	recommendationLetters: array(number()),
 	researchExperience: array(number()),
 });

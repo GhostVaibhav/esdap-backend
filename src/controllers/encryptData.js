@@ -96,7 +96,6 @@ const encryptData = async ({
 	const Plain_researchExperience = seal.PlainText();
 
 	// Create the CipherText(s)
-	// const Cipher_A = seal.CipherText();
 	const Cipher_academicScores = seal.CipherText();
 	const Cipher_attendancePercentage = seal.CipherText();
 	const Cipher_extracurricularActivities = seal.CipherText();
@@ -127,8 +126,9 @@ const encryptData = async ({
 		Plain_recommendationLetters,
 		Cipher_recommendationLetters
 	);
-	encryptor.encrypt(Plain_researchExperience, researchExperience);
+	encryptor.encrypt(Plain_researchExperience, Cipher_researchExperience);
 
+	// console.log(context);
 	return {
 		context,
 		Secret_key_Keypair_A_,
@@ -173,3 +173,4 @@ module.exports = {
 //   copy: [Function: copy],
 //   clone: [Function: clone],
 //   move: [Function: move]
+// }

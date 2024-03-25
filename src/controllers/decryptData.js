@@ -17,7 +17,7 @@ const decryptData = async (
 	decryptor.decrypt(cipherScore2, score2);
 
 	const score1_decoded = ckksEncoder.decode(score1);
-	const score2_decoded = ckksEncoder.decode(score1);
+	const score2_decoded = ckksEncoder.decode(score2);
 
 	console.log("Final score : => ", score1_decoded[0] + score2_decoded[0]);
 };

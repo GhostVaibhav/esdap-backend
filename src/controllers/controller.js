@@ -1,6 +1,6 @@
-const encryptData = require("./encryptionLogic");
-const makeAPICall = require("./makeAPICall");
-const decryptData = require("./decryptionLogic");
+const { encryptData } = require("./encryptData");
+const { makeAPICall } = require("./makeAPICall");
+const { decryptData } = require("./decryptData");
 
 const controller = async (data) => {
 	const {
@@ -14,9 +14,11 @@ const controller = async (data) => {
 		Cipher_teamworkSkillScores,
 		Cipher_recommendationLetters,
 		Cipher_researchExperience,
-	} = encryptData(data);
+	} = await encryptData(data);
 
-	const response = makeAPICall(
+	console.log(context);
+
+	const response = await makeAPICall(
 		context,
 		Galois_key_Keypair_A_,
 		Cipher_academicScores,
@@ -27,8 +29,14 @@ const controller = async (data) => {
 		Cipher_recommendationLetters,
 		Cipher_researchExperience
 	);
-	const cipherScore1 = response.cipherScore1;
-	const cipherScore2 = response.cipherScore2;
+	console.log(response);
 
-	decryptData(context, Secret_key_Keypair_A_, cipherScore1, cipherScore2);
+	// const cipherScore1 = response.cipherScore1;
+	// const cipherScore2 = response.cipherScore2;
+
+	// console.log("this is cipherScore 1"+cipherScore1);
+
+	// decryptData(context, Secret_key_Keypair_A_, cipherScore1, cipherScore2);
 };
+
+module.exports = { controller };
