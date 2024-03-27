@@ -11,9 +11,10 @@ const encryptData = async ({
 	const seal = await SEAL();
 
 	const schemeType = seal.SchemeType.ckks;
+
 	const securityLevel = seal.SecurityLevel.tc128;
-	const polyModulusDegree = 8192;
-	const bitSizes = [60, 20, 20, 20, 20, 60];
+	const polyModulusDegree = 4096;
+	const bitSizes = [46, 16, 46];
 
 	const encParms = seal.EncryptionParameters(schemeType);
 

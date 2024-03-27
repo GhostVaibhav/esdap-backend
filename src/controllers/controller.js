@@ -32,12 +32,12 @@ const controller = async (data) => {
 
 	console.log(response);
 
-	// const cipherScore1 = response.cipherScore1;
-	// const cipherScore2 = response.cipherScore2;
+	const cipherScore1 = response.cipherScore1;
+	const cipherScore2 = response.cipherScore2;
 
-	// console.log("this is cipherScore 1"+cipherScore1);
+	console.log("this is cipherScore 1"+cipherScore1);
 
-	// decryptData(context, Secret_key_Keypair_A_, cipherScore1, cipherScore2);
+	decryptData(context, Secret_key_Keypair_A_, cipherScore1, cipherScore2);
 };
 
 module.exports = { controller };
