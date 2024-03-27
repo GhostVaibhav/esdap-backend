@@ -10,16 +10,17 @@ const decryptData = async (
 	const ckksEncoder = seal.CKKSEncoder(context);
 	const decryptor = seal.Decryptor(context, Secret_key_Keypair_A_);
 
-	const score1 = seal.PlainText();
-	const score2 = seal.PlainText();
+	// Custom function to decrypt -> decode
+	const _decrypt_decode = (Cipher_A)=>{
+		const Plain_A = seal.PlainText();
+		decryptor.decrypt(Cipher_A, Plain_A);
+		return ckksEncoder.decode(Plain_A);
+	}
 
-	decryptor.decrypt(cipherScore1, score1);
-	decryptor.decrypt(cipherScore2, score2);
+	const score_decoded1 =_decrypt_decode(cipherScore1);
+	const score_decoded2 =_decrypt_decode(cipherScore2);
 
-	const score1_decoded = ckksEncoder.decode(score1);
-	const score2_decoded = ckksEncoder.decode(score2);
-
-	console.log("Final score : => ", score1_decoded[0] + score2_decoded[0]);
+	console.log("Final score : => ", score_decoded1[0] + score_decoded2[0]);
 };
 
 module.exports = { decryptData };

@@ -28,10 +28,11 @@ const makeAPICall = async (
 			Cipher_recommendationLetters,
 			Cipher_researchExperience,
 		});
-		console.log(response.data);
+		console.log("API call successful:", response.data);
 		return response.data;
 	} catch (error) {
 		console.error("Error making API call:", error);
+		throw error;
 	}
 };
 
