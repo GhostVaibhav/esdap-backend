@@ -20,10 +20,14 @@ const validateStudentData = (req, res, next) => {
 };
 
 // esdap/v1/backend/data
-router.post("/data", validateStudentData, (req, res) => {
-	// Process the validated student data here
-	res.status(200).json({ message: "Data received successfully" });
-	controller(req.body);
+router.post("/data", validateStudentData, async (req, res) => {
+	try {
+		const data = req.body;
+		const response = await controller(data);
+		res.status(200).json({ resultScore: response });
+	} catch (error) {
+		console.log(error);
+	}
 });
 
 // esdap/v1/backend/version
