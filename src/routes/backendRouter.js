@@ -4,7 +4,7 @@ const router = express.Router();
 const { studentZodSchema } = require("../schemas/studentZodSchema");
 router.use(express.json());
 
-const { controller } = require("./../controllers/controller");
+const { controller } = require("../controllers/controller");
 
 const validateStudentData = (req, res, next) => {
 	const data = req.body;
