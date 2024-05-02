@@ -1,4 +1,5 @@
 const encrypt_operation_decrypt = async ({
+	name,
 	academicScores,
 	attendancePercentage,
 	extracurricularActivities,
