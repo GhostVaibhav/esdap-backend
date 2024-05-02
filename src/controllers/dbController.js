@@ -14,9 +14,10 @@ async function getLoginDetails(req) {
 }
 
 async function getStudentData() {
-    const database = client.db("admin_db");
-    const collection = database.collection("student_data");
+    const database = client.db("student_details");
+    const collection = database.collection("details");
     const data = await collection.find({}).toArray();
+    console.log(data)
     return data;
 }
 

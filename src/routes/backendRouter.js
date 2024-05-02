@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { studentZodSchema } = require("../schemas/studentZodSchema");
-const { collectData } = require("../controllers/dbController");
+const { collectData, getStudentData } = require("../controllers/dbController");
 router.use(express.json());
 
 const { controller } = require("../controllers/controller");
@@ -35,6 +35,15 @@ router.post("/data", validateStudentData, async (req, res) => {
 		console.log(error);
 	}
 });
+
+router.get("/showall", async (req, res) => {
+	try {
+		const result = await getStudentData();
+		res.status(200).json({ result });
+	} catch (error) {
+		console.log(error);
+	}
+})
 
 // esdap/v1/backend/version
 router.post("/test", (req, res) => {
