@@ -260,7 +260,7 @@ const encrypt_operation_decrypt = async ({
 
 	// console.log("Final score : => ", score_decoded1[0] + score_decoded2[0]);
 
-	return ans;
+	return ans.toFixed(3);
 };
 
 module.exports = {
